@@ -1,0 +1,45 @@
+# Core Data Science Libraries
+pandas==2.1.4
+numpy==1.26.2
+scipy==1.11.4
+
+# Market Basket Analysis
+mlxtend==0.23.0
+
+# Database
+sqlalchemy==2.0.23
+sqlite3  # Built-in with Python
+
+# Visualization
+matplotlib==3.8.2
+seaborn==0.13.0
+plotly==5.18.0
+networkx==3.2.1
+
+# Data Validation
+pandera==0.17.2
+
+# Configuration
+pyyaml==6.0.1
+
+# Utilities
+tqdm==4.66.1
+requests==2.31.0
+
+# Testing
+pytest==7.4.3
+pytest-cov==4.1.0
+
+# Jupyter Notebooks
+jupyter==1.0.0
+ipykernel==6.27.1
+nbconvert==7.12.0
+
+# Optional: PostgreSQL support
+# psycopg2-binary==2.9.9
+
+# Optional: MySQL support  
+# pymysql==1.1.0
+
+# Power BI Python Integration
+# powerbiclient==3.1.1
