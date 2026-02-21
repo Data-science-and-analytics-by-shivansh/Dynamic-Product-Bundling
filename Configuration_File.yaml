@@ -1,0 +1,193 @@
+# Dynamic Product Bundling - Configuration File
+
+# Market Basket Analysis Parameters
+mba:
+  # Minimum support: fraction of transactions containing itemset
+  # Lower = more rules but potentially less meaningful
+  # Higher = fewer rules but stronger patterns
+  min_support: 0.02  # 2% of all transactions
+  
+  # Minimum confidence: probability of buying B given A
+  # 0.5 = 50% chance if customer buys A, they also buy B
+  min_confidence: 0.50
+  
+  # Minimum lift: measure of independence
+  # >1 = positive correlation, <1 = negative, =1 = independent
+  # 2.0 = 2x more likely to buy together than randomly
+  min_lift: 2.0
+  
+  # Algorithm selection: 'apriori' or 'fpgrowth'
+  # Apriori: slower but more interpretable
+  # FP-Growth: faster, better for large datasets
+  algorithm: 'fpgrowth'
+  
+  # Maximum antecedent size (items in "if" part of rule)
+  max_antecedent_length: 2
+  
+  # Maximum consequent size (items in "then" part)
+  max_consequent_length: 1
+
+# Bundle Optimization Settings
+bundling:
+  # Maximum items allowed in a single bundle
+  max_bundle_size: 3
+  
+  # Default bundle discount percentage
+  price_discount: 0.10  # 10% off
+  
+  # Minimum profit margin required for bundle
+  min_margin: 0.25  # 25%
+  
+  # Maximum bundles to recommend per product
+  max_recommendations: 5
+  
+  # Bundle pricing strategy: 'fixed_discount', 'dynamic', 'min_price'
+  pricing_strategy: 'dynamic'
+  
+  # Weight factors for bundle scoring
+  scoring_weights:
+    confidence: 0.40
+    lift: 0.35
+    support: 0.15
+    margin: 0.10
+
+# Data Processing
+data:
+  # Path to raw data
+  raw_data_path: 'data/raw/'
+  
+  # Path to processed data
+  processed_data_path: 'data/processed/'
+  
+  # Path to results
+  results_path: 'data/results/'
+  
+  # Minimum quantity threshold (filter out small transactions)
+  min_quantity: 1
+  
+  # Maximum quantity threshold (filter out bulk orders)
+  max_quantity: 100
+  
+  # Minimum transaction value
+  min_transaction_value: 5.0
+  
+  # Remove returns and cancellations
+  remove_returns: true
+  
+  # Customer ID handling for null values
+  handle_null_customers: 'drop'  # 'drop' or 'assign_guest'
+
+# Database Configuration
+database:
+  # Database type: 'sqlite', 'postgresql', 'mysql'
+  type: 'sqlite'
+  
+  # SQLite path (if using SQLite)
+  sqlite_path: 'data/retail.db'
+  
+  # PostgreSQL connection (if using PostgreSQL)
+  # postgres:
+  #   host: 'localhost'
+  #   port: 5432
+  #   database: 'retail_analytics'
+  #   user: 'your_username'
+  #   password: 'your_password'
+  
+  # MySQL connection (if using MySQL)
+  # mysql:
+  #   host: 'localhost'
+  #   port: 3306
+  #   database: 'retail_analytics'
+  #   user: 'your_username'
+  #   password: 'your_password'
+
+# Power BI Export Settings
+powerbi:
+  # Export directory for Power BI data files
+  export_path: 'powerbi/data/'
+  
+  # File formats: 'csv', 'parquet', or 'both'
+  export_format: 'csv'
+  
+  # Refresh schedule
+  refresh_schedule: 'daily'  # 'hourly', 'daily', 'weekly'
+  
+  # Tables to export
+  export_tables:
+    - 'transactions'
+    - 'association_rules'
+    - 'bundle_recommendations'
+    - 'metrics_summary'
+    - 'customer_segments'
+
+# Metrics & Evaluation
+metrics:
+  # Baseline AOV for comparison
+  baseline_aov: 47.20
+  
+  # Baseline cross-sell rate
+  baseline_crosssell_rate: 0.58
+  
+  # A/B test parameters
+  ab_test:
+    control_size: 10000  # customers
+    treatment_size: 10000
+    test_duration_days: 30
+    significance_level: 0.05
+
+# Logging
+logging:
+  level: 'INFO'  # 'DEBUG', 'INFO', 'WARNING', 'ERROR'
+  log_file: 'logs/market_basket.log'
+  console_output: true
+
+# Performance Optimization
+performance:
+  # Number of parallel workers for processing
+  n_jobs: -1  # -1 = use all available cores
+  
+  # Chunk size for batch processing
+  chunk_size: 10000
+  
+  # Enable caching for frequent computations
+  enable_cache: true
+  
+  # Cache directory
+  cache_dir: '.cache/'
+
+# Visualization Settings
+visualization:
+  # Default plot style
+  plot_style: 'seaborn-v0_8-darkgrid'
+  
+  # Figure size (width, height)
+  figure_size: [12, 8]
+  
+  # DPI for saved figures
+  dpi: 300
+  
+  # Color palette
+  color_palette: 'Set2'
+  
+  # Network graph settings
+  network_graph:
+    node_size_multiplier: 100
+    edge_width_multiplier: 0.5
+    layout_algorithm: 'spring'  # 'spring', 'circular', 'kamada_kawai'
+
+# Validation & Quality Checks
+validation:
+  # Minimum number of transactions required
+  min_transactions: 1000
+  
+  # Maximum null percentage allowed
+  max_null_percentage: 0.05  # 5%
+  
+  # Duplicate transaction handling
+  handle_duplicates: 'keep_first'  # 'keep_first', 'keep_last', 'remove_all'
+  
+  # Data quality thresholds
+  quality_checks:
+    min_unique_products: 100
+    min_unique_customers: 100
+    min_avg_transaction_value: 10.0
